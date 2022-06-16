@@ -1,10 +1,10 @@
 import Config
 
 config :venyou, Venyou.Repo,
-  database: "venyou_repo",
-  username: "postgres",
-  password: "Momomo12",
-  hostname: "localhost"
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true
 
 # config :venyou, Venyou.Repo,
 #   adapter: Ecto.Adapters.Postgres,
