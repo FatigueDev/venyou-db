@@ -3,13 +3,12 @@ defmodule Venyou.Repo.Migrations.CreateVenues do
 
   def change do
     create table(:venue) do
-      add :name, :string
-      add :location, :string
-      add :description, :string
-      add :opening_times, :string
-      add :owner, :string
-      add :managers, {:array, :string}
-      add :status, :boolean
+      add :name, :string, default: ""
+      add :location, :string, default: ""
+      add :description, :string, default: ""
+      add :opening_times, :string, default: ""
+      add :owner, :string, default: ""
+      add :status, :boolean, default: false
     end
   end
 end

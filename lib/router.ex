@@ -15,7 +15,17 @@ defmodule AppRouter do
       description: venueJson["description"],
       opening_times: venueJson["opening_times"],
       owner: venueJson["owner"],
-      managers: venueJson["managers"],
+      status: venueJson["status"]
+    }
+  end
+
+  def parseBodyRough(venueJson) do
+    %Venyou.Venue{
+      name: venueJson["name"],
+      location: venueJson["location"],
+      description: venueJson["description"],
+      opening_times: venueJson["opening_times"],
+      owner: venueJson["owner"],
       status: venueJson["status"]
     }
   end
@@ -29,17 +39,17 @@ defmodule AppRouter do
   end
 
   post "/venues" do
-    venue = parseBody(conn.body_params)
-    IO.inspect venue
-    Venyou.Repo.insert(venue)
-    send_resp(conn, 200, "Added venue")
+    venue = parseBodyRough(conn.body_params)
+    {result, newVenue} = Venyou.Repo.insert(venue)
+    dbVenue = Venyou.Repo.get(Venyou.Venue, newVenue.id)
+    send_resp(conn, result, Poison.encode!(dbVenue))
   end
 
   put "/venues/:id" do
     venue = Venyou.Repo.get(Venyou.Venue, id)
     changeset = Venyou.Venue.changeset(venue, parseBody(conn.body_params))
     Venyou.Repo.update(changeset)
-    send_resp(conn, 200, "Updated venue #{id}")
+    send_resp(conn, 200, "Venue updated successfully.")
   end
 
   delete "/venues/:id" do

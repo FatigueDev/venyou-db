@@ -4,18 +4,17 @@ defmodule Venyou.Venue do
   import Ecto.Changeset
 
   schema "venue" do
-    field :name, :string
-    field :location, :string
-    field :description, :string
-    field :opening_times, :string
-    field :owner, :string
-    field :managers, {:array, :string}
-    field :status, :boolean
+    field :name, :string, default: ""
+    field :location, :string, default: ""
+    field :description, :string, default: ""
+    field :opening_times, :string, default: ""
+    field :owner, :string, default: ""
+    field :status, :boolean, default: false
   end
 
   def changeset(venue, params \\ %{}) do
     venue
-    |> cast(params, [:name, :location, :description, :opening_times, :owner, :managers, :status])
+    |> cast(params, [:name, :location, :description, :opening_times, :owner, :status])
   end
 
 end
