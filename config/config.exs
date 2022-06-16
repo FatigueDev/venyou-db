@@ -1,11 +1,11 @@
 import Config
 
-config :venyou, venyou.Endpoint,
+config :venyou, Venyou.Endpoint,
   load_from_system_env: true,
   http: [port: {:system, "PORT"}],
   server: true,
   secret_key_base: "${SECRET_KEY_BASE}",
-  url: [host: "${APP_NAME}.gigalixirapp.com", port: 443],
+  url: [host: "${APP_NAME}.gigalixirapp.com", port: 443]
 
 # config :venyou, Venyou.Repo,
 #   adapter: Ecto.Adapters.Postgres,
