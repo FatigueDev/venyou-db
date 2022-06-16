@@ -1,5 +1,11 @@
 import Config
 
+config :venyou, HelloWeb.Plug,
+  load_from_system_env: true,
+  url: [host: "venyou-11428.nodechef.com", port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
+
 config :venyou, Venyou.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
